@@ -1,0 +1,346 @@
+\documentclass[12pt,english]{article}
+\usepackage[utf8]{inputenc}
+
+\date{}
+
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1.1in,rmargin=1in}
+\pagestyle{plain}
+\usepackage{float}
+\usepackage{rotfloat}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{setspace}
+\usepackage[authoryear]{natbib}
+\usepackage{xcolor}
+\usepackage{ctex}
+\onehalfspacing
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\theoremstyle{plain}
+\newtheorem{assumption}{\protect\assumptionname}
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\newtheorem{lemma}{Lemma}
+\newtheorem{law}{Law}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}%
+\makeatother
+
+\usepackage{babel}
+\providecommand{\assumptionname}{Assumption}
+\providecommand{\theoremname}{Theorem}
+
+
+\begin{document}
+\title{Multi-Period Choice on Distorted Information\thanks{Term paper of Intermediate Microeconomics, 2021 Fall.}}
+\author{\normalsize{\kaishu 王琇}\quad 2020011712\\
+{\normalsize \textit{School of Economics and Management at Tsinghua University}}}
+\maketitle
+\begin{abstract}
+	This paper examines a setting where batches of agents sequentially invest in a certain market. Predecessors may provide information about the market to their successors, but such information may be inaccurate because agents' behavior generates externalities. We study properties of steady state and welfare under this setting, with agents receiving different level of information. Depending on the intensity of externalities, agents' actions may converge. More instructively, although agents may not have the right knowledge regarding the market, they can still make good choices by knowing themselves well. \\\par
+	\noindent \textbf{Keywords}: Information, Externalities, Convergence
+\end{abstract}
+
+
+
+
+\section{Introduction}
+	People follow their predecessors. Job seekers may desire recommendations from experienced staffs, consumers may look at comments before buying a certain good, and we college students may ask senior students for what courses to take.
+	Nowadays, the widespread of information technology makes it easy to access updated news, personal experiences, and different opinions. Such informations plays a decisive role in people making decisions.\par
+	
+	An important topic in economics, information cascade, studies the cumulative effect of information on people's behavior and further evolution of the information. The canonical model constructed by \citet{Banjeree}, \citet{Welch} suggests that when historical information skewed against people's private information, they would simply emulate others' behavior, acting like herds. This may cause erroneous behavior on a massive scale, which can be inefficient or even disastrous to the public. Market bubbles and collapses may serve as an example.\par
+	
+	This paper analyzes a similar but slightly different problem. When studying information and people's behavior, two questions might be asked: How accurate is the information, and how well do people know about themselves? As in the job-seeking example, information provided by experienced workers may be inaccurate, because too many people have entered the industry, making it less profitable than it should be. Job seekers may also be unaware of their own  characteristics, and the most profitable industry may not be compatible with them.\par
+	
+	To address these concerns, we considered a setting where batches of agents sequentially invest on different options in a certain market. Preceding agents may provide information about the market, specifically, yield rate of each investment option, to help their successors make a better choice. Such information are deduced from predecessors' investment returns.\par
+	
+	The key feature of this setting is that besides the yield rate, the actual return from each investment option is also influenced by total investments made on it simultaneously\footnote{More precisely, within an investment period. The model will be further described in the next section.}. Hence, information deduced from actual returns does not truly reflect yield rates, and is ``distorted". We refer to such kind of situation as a certain type of \textbf{externality}. Agents are never aware of the externality, as they ``believe what they see", so preceding agents simply impart their observed rate of return, and subsequent agents make choices based on these rates without considering their peers.\par
+	
+	Agents have varied preferences among the options. These preferences also come into the investment decisions, and it corresponds to our second concern in the job-seeking example that job seekers should also consider their compatiblity with the jobs.\par 
+	
+	In order to answer the two questions raised above, we considered three scenes where agents are with different levels of information: The \textit{basic} scene with deduced rate of return and own preference, the \textit{blind} scene with deduced rate of return but without own preference, and the \textit{truthful} scene with the ground truth of yield rate and own preference.\par
+	
+	We analyzed properties of steady state and welfare under these scenes. Given identically distributed preference among batches of agents, the main conclusions are that:\par
+	1. There must exist a steady state of agents' choices.\par 
+	2. Agents' choices may converge to the steady state or keep altering, depending on the intensity of externalities;\footnote{Convergence refers to agents with similar preferences in different periods choosing similar investment options.}\par
+	3. Taking own preference into consideration (basic scene versus blind scene) must be Pareto-improving;\par
+	4. There is no Pareto-improvement relationship between basic and truthful scenes. Obtaining the ground truth of the yield rates does not necessarily improve individual nor social welfare.\par
+	
+	
+	\section{The Multi-Period Market Model}
+	\subsection{Utility and Budget}
+	As stated, agents arrive at the market in batches. After arrival, agents make their investments, receive payoffs, then leave the market and impart their observed rates of return of each options to the next batch of agents. \par
+	
+	Label the investment options by $1, 2, \dots, m$, each with yield rate $c_j > 0\;(1\leqslant j \leqslant m)$. Note that the term ``yield rate" here does not necessarily correspond to the terminology in finance.\par 
+	
+	Assume that at each period $t\geqslant 1$, $N_t \equiv N$ agents arrive at the market, and we use $A_i^{(t)}$ to call the $i$-th agent in period $t$. The preference of $A_i^{(t)}$ is indexed by a vector $\mathbf{x}_i^{(t)} = \left(x^{(t)}_{i1}, x^{(t)}_{i2}, \dots, x^{(t)}_{im}\right)$, with $x^{(t)}_{ij} > 0$. Suppose she receives return of $r_{ij}^{(t)}$ from option $j$, her utility (payoff) is defined as
+	\begin{equation}
+	U_i^{(t)} = x_{i1}^{(t)}r_{i1}^{(t)} + x_{i2}^{(t)}r_{i2}^{(t)} + \dots + x_{im}^{(t)}r_{im}^{(t)}.
+	\end{equation}
+	Each agent has a budget constraint up to 1, more specifically, denote $e^{(t)}_{ij} \geqslant 0$ the amount that $A_i^{(t)}$ invests on option $j$, then it should holds that
+	\begin{equation}
+	\lVert\mathbf{e}_i^{(t)}\rVert^2 = \sum_{j = 1}^{m}\left(e^{(t)}_{ij}\right)^2 =1,
+	\end{equation}
+	where $\mathbf{e}_i^{(t)} = \left(e^{(t)}_{i1}, e^{(t)}_{i2}, \dots, e^{(t)}_{im}\right)$. \par
+	
+	The actual return from option $j$ is determined by $c_j$ and all agents' investment on $j$, as increasing investments on $j$ dilutes its return. We use a continuous function $f_j^{(t)}$ to represent this dilution process. $f_j^{(t)}$ takes $e_{1j}^{(t)}, \dots,e_{Nj}^{(t)}$ as inputs and output a real value no less than $1$, and is increasing \textit{wrt} each one of its inputs. Agent $A_i^{(t)}$ receives her linear portion of diluted return from option $j$, which equals
+	\begin{equation}
+	r_{ij}^{(t)} = \frac{c_j}{f_j^{(t)}} \times e_{ij}^{(t)}.
+	\end{equation}
+	For simplicity, we assume $f_j^{(t)} \equiv f$, a real valued function with $m$ inputs that does not vary between periods and options.\par
+	
+	To help understanding, the ground truth yield rate $c_j$ and preferences $\mathbf{x}_i^{(t)}$ are given, agents make their investments subject to $(2)$, and their utilities are given by $(1)$ and $(3)$. 
+	The quadratic form of the budget constraint $(2)$ may seem a little weird, in fact, one can replace $e_{ij}^{(t)}$ by $\sqrt{e_{ij}^{(t)}}$ and the constraint will be in linear form, it can then be seen that agents exhibit decreasing marginal utility. The current form is much concise and convenient for analysis.
+	
+	\subsection{Information and Choice}
+	In the basic scene, agents do not know the true values of $c_j$, instead, they receive information from their predecessors. We assume that for $t \geqslant 2$, agents in period $t - 1$ provide the (observed) diluted yield rate of option $j$, denoted by $c_j^{(t)}$. The diluted rate is given by
+	\footnote{As we will see, agent choices only depend on relative sizes between $c_j^{(t)}$s with common $t$, and their absolute sizes do not matter. Therefore, it is fine to make assumptions as in (4), though the magnitude of $c_j^{(t)}$ may change significantly between different $t$s. Similar concerns may appear in the rest of the paper, but we will not restate this issue.}
+	\begin{equation}
+		c^{(t)}_j = c_j\left/f\left(e_{1j}^{(t - 1)}, \dots,e_{Nj}^{(t - 1)}\right)\right.,
+	\end{equation}\par 
+	Agents in period $t$ make decisions based on $c_j^{(t)}$s, without noticing the externalities from other agents' action.\footnote{This implicitly assumes that agents in period $t$ only use information provided by agents in period $t - 1$, and that the information is known by all agents.} Thus, $A_i^{(t)}$ expects to receive $c_j^{(t)}\times e_{ij}^{(t)}$ from option $j$ (compare it with (3)), and tends to maximize
+	\begin{equation}
+	U = x_{i1}^{(t)}c_{1}^{(t)}e_{i1}^{(t)} + \dots + x_{i1}^{(t)}c_{1}^{(t)}e_{i1}^{(t)}.
+	\end{equation} 
+	From Cauchy-Schwartz inequality and $(2)$, it is easily seen that the optimal investment choice is 
+	\begin{equation}
+		\mathbf{e}_{i}^{(t)} = \frac{\mathbf{x}_i^{(t)}\circ \mathbf{c}^{(t)}}{\lVert\mathbf{x}_i^{(t)}\circ \mathbf{c}^{(t)}\rVert},
+	\end{equation}
+	where $\mathbf{c}^{(t)} = \left(c_1^{(t)}, c_2^{(t)}, \dots, c_m^{(t)}\right)$, and ``$\circ$" means multiplication by elements. \par
+	Agents' actual utility received is given by $(1)$, $(3)$, and $(6)$.
+	Given the ground truth $\mathbf{c} = \left(c_1, c_2, \dots, c_m\right)$, agents' preferences $\mathbf{x}_i^{(t)}$ and initial information (beliefs) $\mathbf{c}^{(1)}$, one can solve for choices $\mathbf{e}_i^{(t)}$, subsequent information $\mathbf{c}^{(t)}$, and agent utilities recursively by using $(4)$ and $(6)$.
+	
+	The blind scene is similar to this basic scene, except that agents do not know their preferences $\mathbf{x}_i^{(t)}$. Therefore, they simply assume $x_{ij}^{(t)} \equiv 1$ when making decisions in (5) and (6), and the rest are the same (note that actual preference still influences (1)).\par 
+	
+	In the truthful scene, agents are imparted the ground truth $\mathbf{c}$, and do not convey any information between periods.\footnote{Agents know their own preferences, which is the same in basic scene.} However, agents are still unaware of the externality, so $\mathbf{c}^{(t)}$ in (5) and (6) will be replaced by the ground truth $\mathbf{c}$, and the rest are the same.\par
+	
+	The social scene is much more straightforward. The social planner chooses proper investments subject to (2), in order to maximize the social welfare which aggregates utility given by (1) and (3). Nothing in \textbf{2.2} is considered by the planner. 
+	
+	
+	\section{Convergence of Choice}
+	Under the truthful and social scenes, agents' actions are determined straightforwardly since no concerns on information are raised.\footnote{There is no heterogeneity in action between periods under this two scenes.} However, actions under basic and blind scenes are much more complicated, since recursive processes are involved.\par 
+	One may be intrigued to ask how agents behave in the long-term process under these two scenes, i.e., when $t$ tends to infinity. This is asking whether a steady state exists in the recursive process, and whether such steady state can always be achieved. In math terms, we study the convergency of number series $\left(e_{ij}^{(t)}\right)_{t = 1}^{\infty}$.\par
+	
+	\subsection{Existence of Steady Choice}
+	Hereinafter in this paper, we assume that
+	\begin{equation}
+	\mathbf{x}_i^{(1)} = \mathbf{x}_i^{(2)} = \mathbf{x}_i^{(3)} = \dots \equiv \mathbf{x}_i, \quad  1\leqslant i\leqslant N.
+	\end{equation}
+	This means the distribution of preference among a batch of agents does not vary with period $t$, which is fairly acceptable.\footnote{Notice that we do not assume all agents in a period to be identical.}\par
+	
+	Under this assumption, if for all $i, j$, the series $\left(e_{ij}^{(t)}\right)_{t = 1}^{\infty}$ converges to a certain value $e_{ij}$, then by the property of limits and $(4), (6)$, $\mathbf{e} = (e_{ij})_{N\times m}$ must be a solution for
+	\begin{equation}
+	\left\{
+	\begin{matrix}\displaystyle
+	c'_j = \frac{c_j}{f\left(e_{1j},\dots, e_{Nj}\right)},& 1\leqslant j\leqslant N,
+	\\\quad\\\displaystyle
+	\mathbf{e}_i = \frac{\mathbf{x}_i\circ \mathbf{c}'}{\lVert\mathbf{x}_i\circ \mathbf{c}'\rVert},&  1\leqslant i\leqslant N.
+	\end{matrix}
+	\right.
+	\end{equation}
+	(The meanings of notations are natural. Regard $\mathbf{c'}$ as a function of $\mathbf{e}$.)
+	We call the investment choice satisfying $(8)$ a ``steady choice". Agents' choices must converge to a steady choice if they converge, and once agents in some period have made a steady choice, agents in all subsequent periods will also make the same choices. We also have the following theorem\par
+	
+	\begin{thm}
+		Under the basic and blind scenes, a steady choice must exist.
+	\end{thm}
+	\begin{proof}
+		We only prove the case under the basic scene.\footnote{One should notice that when studying the convergency of choices (payoff is not considered), the blind scene is simply a special case of the basic scene.}
+		Denote $$\mathcal{S} =  \left\{\mathbf{s}\in \mathbb{R}^m: s_j \geqslant0, \lVert \mathbf{s}\rVert = 1 \right\},\quad \mathcal{\underline{S}} =  \left\{\mathbf{s}\in \mathbb{R}^{m - 1}: s_j \geqslant0, \lVert \mathbf{s}\rVert \leqslant 1 \right\},$$ 
+		then it is easy to construct a continuous bijection $g$ from $\mathcal{S}$ to $\mathcal{\underline{S}}$ (e.g., take the first $m - 1$ elements for each $\mathbf{s} \in \mathcal{S}$). Using $g$, it is then easy to construct a continuous bijection $G$ from $\mathcal{S}^N$ to $\mathcal{\underline{S}}^N$.  Note that $\mathbf{e}$ is an element of $\mathcal{S}^{N}$, so it is also an element of $G^{-1}(\mathcal{\underline{S}}^N)$. \par
+		
+		The condition of steady choice, equation $(8)$, can be rewritten as $\mathbf{e} = H(\mathbf{e})$ for a continuous function $H: \mathcal{S}^N\to \mathcal{S}^N$.\footnote{To check that $H$ is defined on $\mathcal{S}^N$ and its continuity, one should use that fact that all $c_j, x_{ij}$ are positive, and that $f \geqslant 1$ is continuous.} This is equivalent to $\mathbf{e}' = G(H(G^{-1}(\mathbf{e}')))$ for some $\mathbf{e}'\in \mathcal{\underline{S}}^N$. Note that $\mathcal{\underline{S}}$ is a compact convex set, and so is $\mathcal{\underline{S}}^N$. Now since $G(H(G^{-1}(\cdot)))$ is a continuous map from $\mathcal{\underline{S}}^N$ to itself, the existence of $\mathbf{e}'$ (and $\mathbf{e}$) is guaranteed by Brouwer fixed point theorem.
+	\end{proof}
+	
+	\subsection{Convergence to Steady Choice}
+	It is now natural to examine when do agent choices converge to the steady choice. Fortunately, we have satisfying results to this question, and we will provide evidence from both the theory and computer simulation to show the prevalence of convergence.\par 
+	
+	In theory, we adopt the method of contraction mapping to support the convergence property. Recall that (4) and (6) define $\mathbf{e}^{(t)}$ recursively by $\mathbf{e}^{(t)} = H(\mathbf{e}^{(t - 1)})$, where $H$ is a continuous map on $\mathcal{S}^N$ (we continue to use notations in \textbf{Theorem 1}). The contraction mapping principle states that, if $H$ has the following Lipschitz condition, then for any beginning $\mathbf{e}^{(1)}$, the sequence $\left(\mathbf{e}^{(t)}\right)_{t = 1}^{\infty}$ converges to a fixed point of $H$, which is the steady choice in our setting.\par \newpage
+	\noindent \textbf{Lipschitz Condition.} For some fixed $q\in (0, 1)$, 
+	\begin{equation}
+		\lVert H(\mathbf{s}_1) - H(\mathbf{s}_2)\rVert \leqslant q\lVert \mathbf{s}_1 - \mathbf{s}_2\rVert
+	\end{equation}
+	holds for any $\mathbf{s}_1, \mathbf{s}_2 \in \mathcal{S}^N$.\footnote{Since subscripting $\mathbf{e}$ refers to the rows of $\mathbf{e}$, we change the notation here from $\mathbf{e}$ to $\mathbf{s}$ to avoid ambiguity.}
+	
+	One may guess that $H$ satisfies the Lipschitz condition, but this is not always true.\footnote{Otherwise we would have used the contraction mapping principle to prove the existence of steady choice.} Take a careful look at the functional form of $H$ and one will see that, although some slight disturbance on the input only changes each row of $H$'s output a little, but as the number of rows $N$ tends to infinity, the cumulative effect may be significant -- ``the curse of dimensionality".\par
+	
+	The good news is that, although large $N$ may enhance the effect of slight disturbance, it also ensures the Lipschitz property of $H$ through other channels. In fact, the Lipschitz condition holds on most parts of $\mathcal{S}^N$, and we have a lemma to describe this property. Before presenting the lemma, we revisit the dilution function $f$ and the assumptions we have made on it.
+	\begin{assumption}
+		The dilution function $f: \mathbb{R}^N \to [1, +\infty)$ is continuous and increasing.
+	\end{assumption}
+	
+	Now we describe the subregion of $\mathcal{S}^N$ on which the Lipschitz condition holds. 
+	
+	\begin{lemma}
+		
+		Suppose that $f$ is further differentiable and concave. If for some given $\varepsilon > 0$,
+		\begin{equation}
+			\left.\frac{\partial\log f(u_1,\dots, u_N)}{\partial u_i}\right|_{(\varepsilon, \dots, \varepsilon)} < \frac{2}{\sqrt{N}},\quad 1\leqslant i \leqslant N,
+		\end{equation}
+		then the Lipschitz condition holds on $\mathcal{S_{\varepsilon}}^N = \left\{\mathbf{s}\in \mathbb{R}^m: s_j \geqslant \varepsilon, \lVert \mathbf{s}\rVert = 1 \right\}$ for $H$.
+	\end{lemma}
+	
+	For example, $f = 1 + \sum_{i}u_i^\alpha$ with $\alpha\geqslant 0$ satisfies \textbf{Assumption 1}, and $f$ is concave if $\alpha\leqslant 1$. By calculation, all $\varepsilon \geqslant \frac{\alpha}{2\sqrt{N}}$ satisfy (10). Therefore, increasing agent number $N$ or decreasing the ``dilution rate" $\alpha$ enlarges the region provided in \textbf{Lemma 1}. One thing worth noticing is that $\alpha = 0$ in this example corresponds to the truthful scene.\par 
+	The proof of \textbf{Lemma 1} is rather tedious so we do not present it here. The main idea is to decompose the change on inputs by components of the vector, then analyze its effect on $H$ step-by-step through (4) and (6).\par 
+	
+	By \textbf{Lemma 1} and the contraction mapping principle, the following theorem is straightforward.
+	
+	\begin{thm}
+		If equation $(10)$ holds for some $\varepsilon > 0$, and for some $\mathcal{S}'\subseteq \mathcal{S}_\varepsilon^N$, $H\left(\mathcal{S}'\right) \subseteq \mathcal{S}'$. Then for any beginning $\mathbf{e}^{(1)}\in\mathcal{S}'$,\footnote{$\mathbf{e}^{(1)}$ is determined by $\mathbf{c}^{(1)}$ through (6).} the sequence $\left(\mathbf{e}^{(t)}\right)_{t = 1}^{\infty}$ must converge to a steady choice.
+	\end{thm}
+	\textbf{Theorem 2} provides a sufficient condition of convergence through rigor math expressions. Although $H\left(\mathcal{S}_\varepsilon^N\right) \subseteq \mathcal{S}_\varepsilon^N$ is rather a strict requirement, the condition in \textbf{Theorem 2} holds more promisingly. This provides us satisfying results regarding the convergence property.\par 
+	
+	
+	\subsection{Simulation Verification}
+	We now use computer simulation to examine the convergence. Hereinafter in this paper, we assume that $N = 50, m = 3$ in simulation, changing these values do not have substantial effects on the outcome.\par
+	Let $f$ take the form of $f = 1 + \sum_{i}^{N}u_i^\alpha$, where $\alpha \geqslant 0$ is an exogenous parameter. The initial belief of the yield rate is set to be $\mathbf{c}^{(1)} = (1, 1, 1)$, as the first batch of arrived agents have no information on the investment options. The ground truth is set as $\mathbf{c} = (1, 2, 3)$, and this has no substantial effects on the outcome either.\par 
+	
+	Agents preferences $x_{ij}$ are drawn i.i.d. from uniform distribution $\mathcal{U}(0, 1)$. Figure 1 fixes one randomly generated $\mathbf{x}$, and show the evolution of $\left(e_{11}^{(t)}\right)_{t = 1}^{+\infty}$, the investment on option 1 of the first agent in period $t$,\footnote{By assumption in (7), these agents are of identical preference, but arrives at different periods.} under $\alpha = 0, 0.5, 0.75, 1, 1.5$, and $2$.
+	
+	
+	\begin{figure}[h]
+		\centering
+		\subfigure[$\alpha = 0$]
+		{
+			\includegraphics[width=0.31\linewidth]{plots/conv_0}
+		}
+		\subfigure[$\alpha = 0.5$]
+		{
+			\includegraphics[width=0.31\linewidth]{plots/conv_05}
+		}
+		\subfigure[$\alpha = 0.75$]
+		{
+			\includegraphics[width=0.31\linewidth]{plots/conv_075}
+		}
+		\subfigure[$\alpha = 1$]
+		{
+			\includegraphics[width=0.31\linewidth]{plots/conv_1}
+		}
+		\subfigure[$\alpha = 1.5$]
+		{
+			\includegraphics[width=0.31\linewidth]{plots/conv_15}
+		}
+		\subfigure[$\alpha = 2$]
+		{
+			\includegraphics[width=0.31\linewidth]{plots/conv_2}
+		}
+		
+		\caption{Convergence of $e_{11}^{(t)}$ under different $\alpha$.}
+		\label{fig:conv_1}
+	\end{figure}
+	
+	Note that the investment choice converges iff $\alpha \leqslant 1$. This is consistent with the example when illustrating \textbf{Lemma 2}, which stated that the Lipschitz condition (and thus convergence) prevails if $\alpha \leqslant 1$.\par 
+	
+	To further verify whether the convergence holds under different agent preferences, we now hold the assumptions above, but treat $\mathbf{x}$ as a random matrix, and then count the frequency of convergence under different values of $\alpha$. For each $\alpha \in [0.5, 1.5]$, 100 trials are made and the proportion of converging trials is plotted in Figure 2.\footnote{$\alpha$ take values by steps of 0.02. Iteration depth is 100 periods for each trial.}
+	
+	\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.45\linewidth]{plots/freq_conv}
+	\caption{Frequency of convergence under different $\alpha$.}
+	\label{fig:freq_conv}
+	\end{figure}
+
+	As we can see, convergency holds for all $\alpha \leqslant 1$. For $\alpha > 1$, choices never converge in under the blind scene, and the probability of convergence reduces to 0 gradually under the basic scene.\par
+	
+	In the functional form of $f$ used for simulation, $\alpha$ represents how significant agent choices dilute the yield, i.e., the intensity of externalities. Therefore, above results showed that, mild externalities disrupt agent choices, but steady states are still attainable; intense externalities can have significant impact on choices, causing agents keep altering between investment options. Results also showed convergence under the blind scene requires stricter conditions to hold. The intuition to this is that when agents do not know about themselves well, they are more sensitive and indecisive to the external environment.
+	
+	\section{Welfare}
+	In last section, we investigated the steady state property of agent choices, and found that surprisingly, if externalities generated by agents' behavior are not too significant, agent choices converge to a fixed point of a certain function. This implies that, although externalities distort the observed information of yield rates, agents still get into a steady state by utilizing the inaccurate information.\par 
+	
+	To study whether this ``distorted steady state" has impact on agents' welfare, we study the Pareto optimality and social welfare under basic, blind and truthful scenes. 
+	
+	\subsection{Knowledge of Private Preference}
+	In response to the questions raised in introduction, we first compare the basic scene with the blind scene to study the influence of knowing one's own preference. \par
+	
+	If there is no externality, then all agents certainly make better choices in the basic scene, since ``what they see is what they get", and they have more information in such a scene. In this case, acquiring personal preference is Pareto-improving for each agent. \par 
+	When externality is generated, getting to know one's preference may not necessarily improve her utility, because the information of the market yield rate is also incorrect. Analyzing this problem in theory is extremely complicated, analyzing through simulation, albeit, provides us with another surprising result.
+	\begin{law}
+		Even with externalities, the steady choice under the basic scene must be Pareto-improving than that under the blind scene.
+	\end{law}
+	
+	We continue to use the parameters and functional forms in the simulation, except for now the ground truth $\mathbf{c}$ is a random vector drawn from $\mathcal{U}(0, 1)^3$ (the preferences $\mathbf{x}$ are also random). Figure 3 shows all 50 agents' utility when making steady choices, in a certain simulation trial.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.45\linewidth]{plots/welf_example}
+		\caption{Utility in a single trial.}
+		\label{fig:welf_example}
+	\end{figure}
+	
+	10,000,000 simulation trials are made, with 10 different values of $\alpha$ from $[0, 1]$, and 1,000 random selected $\mathbf{c}$ combined with 1,000 random $\mathbf{x}$. In all these simulations, the Pareto-improving \textbf{Law 1} holds.\par
+	
+	One thing to be noticed is that \textbf{Law 1} does not state that choices under the basic scene always excels that under the blind scene,\footnote{This is obviously not true, because agents in blind scenes can also make choices that they would choose in the basic scene. The main issue is that they would not do so without knowing their preference.} it only compares the utility of steady choices under two scenes.\par
+	Another result from the simulation as $\mathbf{x}$ gets closer to $(1)_{N\times m}$ (measured by Euclidean distance), the utility improvement from knowledge of personal preference diminishes. This is intuitive because agents' true preference gets closer to their belief of uniform preference in such a case.\par 
+	
+	\textbf{Law 1} is of great meaning. It implies that no matter how intense the externality is or how undetectable the environment is, knowing more about one's self always make improvements (under steady choices).
+	
+	
+	\subsection{Knowledge of the Ground Truth}
+	
+	Another question raised in the introduction refers to the accuracy of information. We compare the basic scene and the truthful scene to examine the influence of truthful information on welfare.\par 
+	
+	Recall that in the truthful scene, agents are imparted the ground truth yield rate of each investment option, but are unaware of the externality. Thus, agents utilize $\mathbf{c}$ to make one-shot choices, and their choices are given by (8) with $\mathbf{c}^{(t)}$ replaced by $\mathbf{c}$. Agents' utility are then determined, and no recursion process is involved.\par 
+	
+	We use computer simulation to make the comparison between the one-shot outcome of truthful scene and the steady choice of the basic scene. Parameters and functional forms for simulation follow above. The main conclusion is that no Pareto-improvement relationship is between these two settings, and that the truthful scene always have lower sum of utilities.\par
+	
+	The first conclusion is supported by some simple counterexamples, and we will not present them here. As for the inferiority of truthful scene on sum of utilities, 10,000,000 trials of simulation with the same set of parameters as in section 4.1 are conducted. Unlike the identically-true result in \textbf{Law 1}, there are few cases in which the truthful scene has a higher sum (total of 12). Considering the massive amount of trials, we can still make the following conclusion.
+	\begin{law}
+		If agents' preferences and the truthful yield rate are considered as uniformly distributed random variables, steady choices under the basic scene generate higher sum of utility than the truthful scene, with probability close to 1. 
+	\end{law}
+	
+	\begin{figure}[h]
+		\centering
+		\subfigure
+		{
+			\includegraphics[width=0.4\linewidth]{plots/welf_bt}
+		}\quad
+		\subfigure
+		{
+			\includegraphics[width=0.4\linewidth]{plots/welf_bb}
+		}
+		
+		\caption{Comparison of utility sum under different scenes.}
+		\label{fig:welf_vs}
+	\end{figure}
+	 
+	Figure 4(a) is a scatter plot of utility sum in both scenes under a fixed $\mathbf{c}$ and 1,000 randomly generated $\mathbf{x}$, with the red line indicating $y = x$. One can see although \textbf{Law 2} states that the basic scene has higher utility sums, the difference is not significant. In contrast, Figure 4(b) presents the utility sum in basic scene versus blind scene, using the same set of parameters. We can see from this that the improvement stated in \textbf{Law 1} is much more remarkable.\par 
+	
+	For all this, \textbf{Law 2} strongly rejects the guessing that acquiring ground truth may improve agents' well-being. The intuitive explanation to this is that the information distortion in the basic scene ``offsets" the effect of externalities, so they can make better choices. \par 
+	The experience from predecessors may not be accurate, but is useful, as it is tested by time.\par
+	
+	\section{Summary}
+	In this paper we study a variant of the conventional information cascade problem, in which the information conveyed can be distorted by agents' behavior. We also put into consideration the knowledge of private preference, as self cognition is a long-lasting topic.\par 
+	
+	We construct a multi-period choice model to quantify all concerns above, and attained quite satisfying results regarding the steady state of agents' behavior and welfare. The basic scene with knowledge of personal preference but without the ground truth of the environment turns out to be the most efficient set of information, and this result has philosophical enlightenment to some extent. Knowing about one's own well enhances sustainability to the environment, and always improves one's well-being. Knowing the truth of surroundings, however, does not necessarily make one better.\par 
+	
+	We may not be able to discern all secrets of this world, but with self cognition and past experiences, we make the right choices steadily.
+	
+	
+
+\bibliographystyle{aer}
+\bibliography{cascade.bib}
+
+
+
+\appendix
+
+\section{Supplementary Materials}
+All Python codes used for simulation in this paper can be found at. Readers can check them in case of need, but have to notice that these codes are not organized.
+
+\end{document}
